@@ -8,17 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Repository\Repository.Diary.csproj" />
-    <ProjectReference Include="..\Shared\Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Services\Contracts\" />
     <Folder Include="Services\Implmentation\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Repository\Repository.Diary.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Shared\Shared.csproj" />
   </ItemGroup>
 
 </Project>

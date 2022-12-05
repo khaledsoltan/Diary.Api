@@ -27,8 +27,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
   </ItemGroup>
 
+
+
+
   <ItemGroup>
-    <ProjectReference Include="..\Business\Business.Diary.csproj" />
+    <ProjectReference Include="..\..\Core\Business\Business.Diary.csproj" />
   </ItemGroup>
 
 </Project>

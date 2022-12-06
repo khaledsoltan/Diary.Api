@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Business.AuthService.Contracts;
 using Business.AuthService.Implmentation;
+using Business.Diary.Services.Contracts;
+using Business.Diary.Services.Implmentation;
 using Business.GenericServices.Contracts;
 using Business.ServiceLocator.Contracts;
 using Domain.Auth;
@@ -22,13 +24,15 @@ namespace Business.ServiceLocator.Implmentation
     {
     
         private readonly Lazy<IAuthenticationService> _authenticationService;
-
-        public ServiceLocator(IUnitOfWork repositoryManager, ILoggerManager logger , IMapper mapper, UserManager<User> userManager, IOptions<JwtConfiguration> configuration)
+        private readonly Lazy<IDiaryService> _diaryService;
+         
+        public ServiceLocator(IUnitOfWork repository, ILoggerManager logger , IMapper mapper, UserManager<User> userManager, IOptions<JwtConfiguration> configuration)
         {
             _authenticationService = new Lazy<IAuthenticationService>(() => new AuthenticationService(logger, mapper, userManager, configuration));
+            _diaryService = new Lazy<IDiaryService>(() => new DiaryService(repository, logger, mapper));
 
         }
-
+        public IDiaryService DiaryService => _diaryService.Value;
         public IAuthenticationService AuthenticationService => _authenticationService.Value;
 
     }

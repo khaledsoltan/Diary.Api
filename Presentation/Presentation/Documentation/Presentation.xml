@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Presentation.Diary</name>
+    </assembly>
+    <members>
+        <member name="T:Presentation.Diary.Controllers.DiaryController">
+            <summary>
+            
+            </summary>
+            
+        </member>
+        <member name="M:Presentation.Diary.Controllers.DiaryController.#ctor(Business.ServiceLocator.Contracts.IServiceLocator)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Presentation.Diary.Controllers.DiaryController.GetDiaries(Shared.RequestParameters.Diary.DiaryRequestParameter)">
+            <summary>
+            GetDiaries 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Presentation.Diary.Controllers.DiaryController.CreateDiary(Shared.DTOS.DiaryDto.DiaryDto)">
+            <summary>
+            Create Diary 
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

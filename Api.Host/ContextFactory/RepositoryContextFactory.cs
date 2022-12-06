@@ -15,7 +15,7 @@ namespace Api.Host.ContextFactory
            
             var builder = new DbContextOptionsBuilder<RepositoryContext>()
                 .UseSqlServer(configuration.GetConnectionString("sqlConnection"),
-                    b => b.MigrationsAssembly("Repository"));
+                    b => b.MigrationsAssembly("Repository.Diary"));
 
             return new RepositoryContext(builder.Options);
         }

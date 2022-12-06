@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Repository.Extensions.Utility
 {
+
     public static class OrderQueryBuilder
     {
         public static string CreateOrderQuery<T>(string orderByQueryString)
@@ -36,4 +37,5 @@ namespace Repository.Extensions.Utility
             return orderQuery;
         }
     }
+
 }

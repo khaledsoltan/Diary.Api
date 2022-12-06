@@ -1,4 +1,5 @@
 ﻿using Business.AuthService.Contracts;
+using Business.Diary.Services.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace Business.ServiceLocator.Contracts
     {
         
         IAuthenticationService AuthenticationService { get; }
+
+        IDiaryService DiaryService { get; }
 
     }
 }

@@ -78,10 +78,11 @@ namespace Business.AuthService.Implmentation
         }
         private async Task<List<Claim>> GetClaims()
         {
-           var claims = new List<Claim>
-           {
-               new Claim(ClaimTypes.Name, _user?.UserName)
-           };
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier,  _user.Id),
+                new Claim(ClaimTypes.Name,  _user.UserName)
+            };
             var roles = await _userManager.GetRolesAsync(_user);
             foreach (var role in roles)
             {

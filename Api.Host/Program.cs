@@ -84,10 +84,10 @@ app.UseSwaggerUI(s =>
 
 app.UseHttpsRedirection();
 app.UseResponseCaching();
-app.UseAuthorization();
 app.UseHttpCacheHeaders();
-app.MapControllers();
 app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
 app.UseIpRateLimiting();
 app.Run();
 NewtonsoftJsonPatchInputFormatter GetJsonPatchInputFormatter() =>

@@ -86,7 +86,7 @@ namespace Api.Host.Extensions
                 new RateLimitRule
                 {
                     Endpoint = "*",
-                    Limit = 3,
+                    Limit =1000,
                     Period = "5m"
                  }
              };
@@ -155,9 +155,9 @@ namespace Api.Host.Extensions
             {
                 s.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Khaled Soltan Api",
+                    Title = "OnlineDiary Api",
                     Version = "v1",
-                    Description = "CompanyEmployees API by CodeMaze",
+                    Description = "OnlineDiary API by Khaled Soltan",
                     TermsOfService = new Uri("https://www.linkedin.com/in/khaled-soltan/"),
                     Contact = new OpenApiContact
                     {
@@ -167,17 +167,13 @@ namespace Api.Host.Extensions
                     },
                     License = new OpenApiLicense
                     {
-                        Name = "CompanyEmployees API LICX",
+                        Name = "OnlineDiary API LICX",
                         Url = new Uri("https://example.com/license"),
                     }
 
 
                 });
-                //s.SwaggerDoc("v2", new OpenApiInfo
-                //{
-                //    Title = "Khaled Soltan Api",
-                //    Version = "v2"
-                //});
+                
                 var xmlFile = $"{typeof(Presentation.AssemblyReference).Assembly.GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 s.IncludeXmlComments(xmlPath);

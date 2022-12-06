@@ -19,10 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Utility\HatetosLinks\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Presentation\Presentation\Presentation.Diary.csproj" />
   </ItemGroup>
 

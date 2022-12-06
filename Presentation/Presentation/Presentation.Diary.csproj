@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <DocumentationFile>D:\BaseArchitecture\BaseWebApi\Api.Host\Documentation\Presentation.xml</DocumentationFile>
+    <DocumentationFile>D:\BaseArchitecture\Diary\Presentation\Presentation\Documentation\Presentation.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

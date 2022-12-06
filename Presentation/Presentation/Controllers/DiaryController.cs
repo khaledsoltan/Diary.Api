@@ -31,6 +31,14 @@ namespace Presentation.Diary.Controllers
     [ResponseCache(CacheProfileName = "120SecondsDuration")]
     public class DiaryController : ControllerBase
     {
+
+        public const string GetAllDiaries = nameof(GetAllDiaries);
+        public const string CreateDiaryForUser = nameof(CreateDiaryForUser);
+        public const string DeleteDiary = nameof(DeleteDiary);
+        public const string UpdateDiaryForUser = nameof(UpdateDiaryForUser);
+
+
+        
         private readonly IServiceLocator _service;
 
         /// <summary>
@@ -42,7 +50,7 @@ namespace Presentation.Diary.Controllers
         /// GetDiaries 
         /// </summary>
         /// <returns></returns>
-        [HttpGet(Name = "GetDiariesByUserId")]
+        [HttpGet(Name = GetAllDiaries)]
         public async Task<IActionResult> GetDiaries([FromQuery] DiaryRequestParameter diaryRequestParameter)
         {
             var pagedResult = await  _service.DiaryService.GetAllDiariesByUserId(diaryRequestParameter , trackChanges: false);
@@ -55,14 +63,14 @@ namespace Presentation.Diary.Controllers
         /// Create Diary 
         /// </summary>
         /// <returns></returns>
-        [HttpPost(Name = "CreateDiary")]
+        [HttpPost(Name = CreateDiaryForUser)]
         public async Task<IActionResult> CreateDiary(DiaryDto diaryDto)
         {
             var baseResult =  _service.DiaryService.CreateDiary(diaryDto);
 
             return Ok(baseResult);
         }
-        [HttpDelete(Name = "DeleteDiaryForUser")]
+        [HttpDelete(Name = DeleteDiary)]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
 
         public IActionResult DeleteDiaryForUser(Guid DiaryId)
@@ -71,7 +79,7 @@ namespace Presentation.Diary.Controllers
             return Content("Delete Sucsseful");
         }
 
-        [HttpPut(Name = "UpdateDiary")]
+        [HttpPut("UpdateDiary",Name = UpdateDiaryForUser)]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public IActionResult UpdateDiary(Guid DiaryId, [FromBody] UpdateDiaryDto UpdateDiaryDto)
         {

@@ -19,10 +19,9 @@ namespace Api.Diary.Utility.HatetosLinks.Diary
                   {
                       model
                       .AddSelf(m => m.Id, "This is a GET self link.")
-                      .AddRoute(m => m.Id, DiaryController.CreateDiaryForUser)
                       .AddRoute(m => m.Id, DiaryController.UpdateDiaryForUser)
-                      .AddRoute(m => m.Id, DiaryController.DeleteDiary)
-                      .AddRoute(m => m.Id, DiaryController.GetAllDiaries);
+                      .AddRoute(m => m.Id, DiaryController.DeleteDiary);
+
                   });
             });
     }

@@ -1,4 +1,6 @@
 ﻿using AspNetCoreRateLimit;
+using Business.Diary.GenericServices.Contracts;
+using Business.Diary.GenericServices.Implmentation;
 using Business.ServiceLocator.Contracts;
 using Business.ServiceLocator.Implmentation;
 using Domain.Auth;
@@ -207,5 +209,11 @@ namespace Api.Host.Extensions
 
 
         }
+
+        public static void ConfigureValidateIFexists(this IServiceCollection services)
+            => services.AddScoped<IValidateIFexists, ValidateIFexists>();
+
+   
+            
     }
 }

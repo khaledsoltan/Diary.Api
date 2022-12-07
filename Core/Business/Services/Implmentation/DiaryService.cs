@@ -50,7 +50,7 @@ namespace Business.Diary.Services.Implmentation
         }
         public async void DeleteDiaryForUser(Guid DiaryId, string Userid, bool trackChanges)
         {
-            var diaryForDelete = await _repository.Diary.GetDiaryByIdAndUserId(DiaryId, Userid, trackChanges);
+            var diaryForDelete = await _repository.Diary.GetDiaryByIdAndUserId(DiaryId, trackChanges);
             if (diaryForDelete is null)
                 throw new Exception();
             _repository.Diary.DeleteDiary(diaryForDelete);
@@ -59,7 +59,7 @@ namespace Business.Diary.Services.Implmentation
 
         public async Task<DiaryDto> UpdateDiary(Guid DiaryId, string Userid, UpdateDiaryDto UpdateDiaryDto, bool trackChanges)
         {
-            var diaryrntity = await _repository.Diary.GetDiaryByIdAndUserId(DiaryId, Userid, trackChanges);
+            var diaryrntity = await _repository.Diary.GetDiaryByIdAndUserId(DiaryId, trackChanges);
             _mapper.Map(UpdateDiaryDto, diaryrntity);
             _repository?.CompleteAsync();
             var diaryDtoDto = _mapper.Map<DiaryDto>(diaryrntity);

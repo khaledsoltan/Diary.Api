@@ -13,7 +13,7 @@ namespace Repository.Diary.Repositories.Contracts
     {
          Task<PagedList<DiarY>> GetAllDiariesByUserId(DiaryRequestParameter diaryRequestParameter, bool trackChanges);
 
-         Task<DiarY> GetDiaryByIdAndUserId(Guid DiaryId, String UserId, bool trackChanges);
+         Task<DiarY> GetDiaryByIdAndUserId(Guid DiaryId,  bool trackChanges);
 
          void CreateDiary(DiarY diary);
 

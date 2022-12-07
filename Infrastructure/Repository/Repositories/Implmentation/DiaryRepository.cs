@@ -36,16 +36,16 @@ namespace Repository.Diary.Repositories.Implmentation
 
             var employees = await FindByCondition(x => x.UserId == _userId, trackChanges)
                     //.FilterDiaries(diaryRequestParameter.FromDate, diaryRequestParameter.ToDate)
-                    .Sort(diaryRequestParameter.OrderBy)
-                    .Search(diaryRequestParameter.SearchDiaryName)
+                    .Sort(diaryRequestParameter?.OrderBy)
+                    .Search(diaryRequestParameter?.SearchDiaryName)
                     .ToListAsync();
 
             return PagedList<DiarY>
                 .ToPagedList(employees, diaryRequestParameter.PageNumber, diaryRequestParameter.PageSize);
         }
 
-        public async Task<DiarY> GetDiaryByIdAndUserId(Guid DiaryId, String UserId, bool trackChanges)
-            => await FindByCondition(x => x.Id == DiaryId && x.UserId == UserId, trackChanges).SingleOrDefaultAsync();
+        public async Task<DiarY> GetDiaryByIdAndUserId(Guid DiaryId,  bool trackChanges)
+            => await FindByCondition(x => x.Id == DiaryId && x.UserId == _userId, trackChanges).SingleOrDefaultAsync();
 
 
         public void CreateDiary(DiarY diary) 

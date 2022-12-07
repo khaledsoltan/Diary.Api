@@ -15,7 +15,6 @@ namespace Business.Diary.Services.Contracts
 
         void DeleteDiaryForUser(Guid DiaryId, string Userid, bool trackChanges);
 
-
         Task<(IEnumerable<DiaryDto> diaries, MetaData metaData)> GetAllDiariesByUserId(DiaryRequestParameter diaryRequestParameter, bool trackChanges);
         Task<DiaryDto> UpdateDiary(Guid DiaryId, string Userid, UpdateDiaryDto UpdateDiaryDto, bool trackChanges);
     }

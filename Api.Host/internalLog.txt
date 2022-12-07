@@ -746,3 +746,17 @@ File name: 'NLog.Web.AspNetCore, Culture=neutral, PublicKeyToken=null'
 2022-12-06 17:41:51.3331 Info Registered target FileTarget(Name=alldata)
 2022-12-06 17:41:51.3462 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
 2022-12-06 17:41:51.3679 Info Validating config: TargetNames=alldata, ConfigItems=44, FilePath=D:\BaseArchitecture\Diary\Api.Host\nlog.config
+2022-12-07 08:32:48.3125 Info Message Template Auto Format enabled
+2022-12-07 08:32:48.3649 Info Loading assembly: NLog.Web.AspNetCore
+2022-12-07 08:32:48.4237 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Error loading extensions: NLog.Web.AspNetCore
+ ---> System.IO.FileNotFoundException: Could not load file or assembly 'NLog.Web.AspNetCore, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.
+File name: 'NLog.Web.AspNetCore, Culture=neutral, PublicKeyToken=null'
+   at System.Reflection.RuntimeAssembly.InternalLoad(ObjectHandleOnStack assemblyName, ObjectHandleOnStack requestingAssembly, StackCrawlMarkHandle stackMark, Boolean throwOnFileNotFound, ObjectHandleOnStack assemblyLoadContext, ObjectHandleOnStack retAssembly)
+   at System.Reflection.RuntimeAssembly.InternalLoad(AssemblyName assemblyName, RuntimeAssembly requestingAssembly, StackCrawlMark& stackMark, Boolean throwOnFileNotFound, AssemblyLoadContext assemblyLoadContext)
+   at System.Reflection.Assembly.Load(String assemblyString)
+   at NLog.Internal.AssemblyHelpers.LoadFromName(String assemblyName)
+   at NLog.Config.LoggingConfigurationParser.ParseExtensionWithAssembly(String assemblyName, String prefix)
+   --- End of inner exception stack trace ---
+2022-12-07 08:32:49.6830 Info Registered target FileTarget(Name=alldata)
+2022-12-07 08:32:49.7147 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2022-12-07 08:32:49.7708 Info Validating config: TargetNames=alldata, ConfigItems=44, FilePath=D:\BaseArchitecture\Diary\Api.Host\nlog.config

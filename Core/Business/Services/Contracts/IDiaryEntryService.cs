@@ -17,8 +17,8 @@ namespace Business.Diary.Services.Contracts
         Task<GetDiaryEntryDto> CreateDiaryEntry(Guid diaryId,  DiaryEntryDtoForCreate diaryEntrydto, bool treackChange);
 
         Task<GetDiaryEntryDto> UpdateDiaryEntry(Guid DiaryId,  Guid DiaryEntryId, DiaryEntryDtoForUpdate diaryEntrydtoforUpdate, bool treackChangeDiary, bool treackChangeEntry);
-
         Task DeleteDiaryEntry(Guid diaryId, Guid diaryEntryId, bool trackChanges);
+        Task<GetDiaryEntryDto> GetDiaryEntriesById(Guid diaryId, Guid diaryEntryId, bool trackChanges);
 
         Task<(MetaData metaData, IEnumerable<GetDiaryEntryDto>? diaryEntries)> GetDaysInMonthWithEntries(Guid diaryId, DiaryEntryParameters diaryEntryParameters, int Month, int Year, bool trackchange);
 

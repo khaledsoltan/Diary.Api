@@ -8,6 +8,10 @@ namespace Shared.DTOS.DiaryEvent
 {
     public record DiaryEventDto()
     {
+        public Guid? Id { get; set; }
+
+        public Guid? DiaryId { get; set; }
+
         public string? EventName { get; set; }
 
         public string? EventDescription { get; set; }

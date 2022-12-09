@@ -33,6 +33,12 @@ namespace Business.Diary.Services.Implmentation
             _mapper = mapper;
             _GetAndcheckIfExists = validateIFexists;
         }
+        public async Task<GetDiaryEntryDto> GetDiaryEntriesById(Guid diaryId, Guid diaryEntryId, bool trackChanges)
+        {
+            var diaryEntry = await _GetAndcheckIfExists.GetDiarEntryAndCheckIfExists(diaryId, diaryEntryId, trackChanges);
+            var diaryEntryForReturn = _mapper.Map<GetDiaryEntryDto>(diaryEntry);
+            return diaryEntryForReturn;
+        }
 
         public async Task<GetDiaryEntryDto> CreateDiaryEntry(Guid diaryId, DiaryEntryDtoForCreate diaryEntrydto, bool treackChange)
         {

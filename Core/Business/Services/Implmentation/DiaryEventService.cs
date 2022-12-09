@@ -33,24 +33,26 @@ namespace Business.Diary.Services.Implmentation
             _checkIfExists = validateIFexists;
         }
 
-        public async void CreateDiaryEvent(Guid diaryId, DiaryEventDto diaryEventDto, bool treackChange)
+        public async Task<DiaryEventDto> CreateDiaryEvent(Guid diaryId, DiaryEventDto diaryEventDto, bool treackChange)
         {
-              await  _checkIfExists.GetDiaryAndCheckIfExists(diaryId, treackChange);
-              var diaryEvent = _mapper.Map<DiaryEvent>(diaryEventDto);
-              _repository.DiaryEvent.CreateNewDiaryEvent(diaryEvent, diaryId);
-              _repository?.CompleteAsync();
+            await  _checkIfExists.GetDiaryAndCheckIfExists(diaryId, treackChange);
+            var diaryEvent = _mapper.Map<DiaryEvent>(diaryEventDto);
+            _repository.DiaryEvent.CreateNewDiaryEvent(diaryEvent, diaryId);
+            await _repository.CompleteAsync();
+            var diaryEventForReturn = _mapper.Map<DiaryEventDto>(diaryEvent);
+            return diaryEventForReturn;
         }
 
-        public async void DeleteDiaryEvent(Guid diaryId, Guid DiaryEventId, bool trackChanges)
+        public async Task DeleteDiaryEvent(Guid diaryId, Guid DiaryEventId, bool trackChanges)
         {
            var diaryEvent = await  _checkIfExists.GetDiaryEventAndCheckIfExists(diaryId, DiaryEventId, trackChanges);
             _repository.DiaryEvent.DeleteDiaryEvent(diaryEvent);
-            _repository?.CompleteAsync();
+            await _repository.CompleteAsync();
         }
 
       
 
-        public async Task<(MetaData metaData ,IEnumerable<DiaryEventDto>? events)> GetDaysInMonthWithEvents(Guid diaryId, Guid EventId, DiaryEventsParameters diaryEventsParameters, int Month, int Year, bool trackchange)
+        public async Task<(MetaData metaData ,IEnumerable<DiaryEventDto>? events)> GetDaysInMonthWithEvents(Guid diaryId,  DiaryEventsParameters diaryEventsParameters, int Month, int Year, bool trackchange)
         {
             var eventsWithMetaData = await _repository.DiaryEvent.GetDaysInMonthWithEntries(diaryId, diaryEventsParameters, Month, Year, trackchange);
 

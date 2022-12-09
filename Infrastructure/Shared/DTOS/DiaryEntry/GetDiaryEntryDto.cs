@@ -9,7 +9,8 @@ namespace Shared.DTOS.DiaryEntry
 {
     public record GetDiaryEntryDto()
     {
-
+        public Guid? Id { get; set; }
+        public Guid? DiaryId { get; set; }
         public string? EntryTitle { get; set; }
         public string? EntryText { get; set; }
         public DateTime UpdatedDate { get; set; }

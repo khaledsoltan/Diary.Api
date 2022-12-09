@@ -30,9 +30,12 @@ namespace Presentation.Diary.Controllers
         public const string Update_DiaryEntry = nameof(Update_DiaryEntry);
         public const string Delete_DiaryEntry = nameof(Delete_DiaryEntry);
         public const string GetDays_InMonthWithEntries = nameof(GetDays_InMonthWithEntries);
-
+        public const string GetDiaryEntries_RecentlyChanged = nameof(GetDiaryEntries_RecentlyChanged);
+        public const string GetDiary_EntriesByDate = nameof(GetDiary_EntriesByDate);
+        public const string GetDiary_EntriesById = nameof(GetDiary_EntriesById);
 
         
+
         private readonly IServiceLocator _service;
 
         public DiaryEntryController(IServiceLocator service) => _service = service;
@@ -40,15 +43,15 @@ namespace Presentation.Diary.Controllers
 
         [HttpPost("CreatEentryDiary", Name = CreatEentry_Diary)]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
-        public IActionResult CreatEentryDiary(Guid diaryId, [FromBody] DiaryEntryDtoForCreate diaryEntrydtoForCreate)
+        public IActionResult CreatEentryDiary(Guid DiaryId, [FromBody] DiaryEntryDtoForCreate diaryEntrydtoForCreate)
         {
            
-           var result =  _service.DiaryEntryService.CreateDiaryEntry(diaryId,  diaryEntrydtoForCreate, false);
+           var result =  _service.DiaryEntryService.CreateDiaryEntry(DiaryId,  diaryEntrydtoForCreate, false);
            return Ok(result);
 
         }
 
-        [HttpPut("{diaryId:guid}, {entryId:guid}", Name = Update_DiaryEntry)]
+        [HttpPut("UpdateDiaryForDiaryEntry", Name = Update_DiaryEntry)]
         public IActionResult UpdateDiaryForDiaryEntry(Guid diaryId, Guid entryId, [FromBody] DiaryEntryDtoForUpdate diaryEntrydto)
         {
        
@@ -57,7 +60,7 @@ namespace Presentation.Diary.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("{diaryEntryId:guid}", Name = Delete_DiaryEntry)]
+        [HttpDelete("DeleteDiaryEntry", Name = Delete_DiaryEntry)]
         public OkApiResponse<string> DeleteDiaryEntry(Guid diaryId,Guid diaryEntryId)
         {
             _service.DiaryEntryService.DeleteDiaryEntry(diaryId , diaryEntryId, trackChanges: false);
@@ -66,14 +69,14 @@ namespace Presentation.Diary.Controllers
 
  
 
-        [HttpGet("{DiaryId:guid}", Name = GetDays_InMonthWithEntries)]
+        [HttpGet("GetDaysInMonthWithEntries", Name = GetDays_InMonthWithEntries)]
         public async Task<IActionResult> GetDaysInMonthWithEntries(Guid diaryId, [FromQuery] DiaryEntryParameters diaryEntryParameters, int Month, int Year)
         {
             var pagedResult = await _service.DiaryEntryService.GetDaysInMonthWithEntries(diaryId, diaryEntryParameters, Month, Year ,  false);
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedResult.metaData));
             return Ok(pagedResult.diaryEntries);
         }
-        [HttpGet("GetDiaryEntriesByDate/{DiaryId:guid}")]
+        [HttpGet("GetDiaryEntriesRecentlyChanged", Name = GetDiaryEntries_RecentlyChanged)]
 
         public async Task<IActionResult> GetDiaryEntriesRecentlyChanged(Guid diaryId, [FromQuery] DiaryEntryParameters diaryEntryParameters,  DateTime FromDate, DateTime ToDate)
         {
@@ -82,7 +85,7 @@ namespace Presentation.Diary.Controllers
             return Ok(pagedResult.diariyentries);
         }
 
-        [HttpGet("GetDiaryEntriesByDate/{DiaryId:guid}")]
+        [HttpGet("GetDiaryEntriesByDate" , Name = GetDiary_EntriesByDate)]
         public async Task<IActionResult> GetDiaryEntriesByDate(Guid diaryId, [FromQuery] DiaryEntryParameters diaryEntryParametersDateTime, DateTime FromDate, DateTime ToDate)
         {
             var pagedResult = await _service.DiaryEntryService.GetDiaryEntriesByDate(diaryId, diaryEntryParametersDateTime , FromDate, ToDate, false);
@@ -90,6 +93,13 @@ namespace Presentation.Diary.Controllers
             return Ok(pagedResult.diariyentries);
         }
 
+        [HttpGet("GetDiaryEntriesById", Name = GetDiary_EntriesById)]
+        public async Task<IActionResult> GetDiaryEntriesById(Guid diaryId, Guid diarEntry)
+        {
+            var result = await _service.DiaryEntryService.GetDiaryEntriesById(diaryId, diarEntry, false);
+            return Ok(result);
+        }
+        
 
     }
 }

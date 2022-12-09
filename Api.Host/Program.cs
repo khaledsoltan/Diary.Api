@@ -1,5 +1,7 @@
 
 using Api.Diary.Utility.HatetosLinks.Diary;
+using Api.Diary.Utility.HatetosLinks.DiaryEntry;
+using Api.Diary.Utility.HatetosLinks.DiaryEvent;
 using Api.Host.Extensions;
 using AspNetCoreRateLimit;
 using Business.GenericServices.Contracts;
@@ -62,6 +64,8 @@ builder.Services.ConfigureJWT(builder.Configuration);
 builder.Services.AddJwtConfiguration(builder.Configuration);
 builder.Services.ConfigureSwagger();
 builder.Services.AddDiaryLinks();
+builder.Services.AddDiaryEventsEvents();
+builder.Services.AddDiaryEntriesLinks();
 builder.Services.ConfigureValidateIFexists();
 var app = builder.Build();
 // Configure the HTTP request pipeline.

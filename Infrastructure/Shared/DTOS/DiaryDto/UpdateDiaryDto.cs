@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Shared.DTOS.DiaryDto 
 {
-
-    public record UpdateDiaryDto(string WorkSpace);
+    public record UpdateDiaryDto(string DiaryName);
 
 }

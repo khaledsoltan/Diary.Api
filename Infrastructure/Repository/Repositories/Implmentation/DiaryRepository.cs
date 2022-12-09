@@ -27,17 +27,15 @@ namespace Repository.Diary.Repositories.Implmentation
         private readonly IHttpContextAccessor _httpContextAccessor;
         private string _userId ;
 
-        public DiaryRepository(RepositoryContext repositoryContext , IHttpContextAccessor httpContextAccessor)
-            : base(repositoryContext)
+        public DiaryRepository(RepositoryContext repositoryContext , IHttpContextAccessor httpContextAccessor) : base(repositoryContext)
         {
             _userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         }
         public async Task<PagedList<DiarY>> GetAllDiariesByUserId(DiaryRequestParameter diaryRequestParameter, bool trackChanges) {
 
             var employees = await FindByCondition(x => x.UserId == _userId, trackChanges)
-                    //.FilterDiaries(diaryRequestParameter.FromDate, diaryRequestParameter.ToDate)
-                    .Sort(diaryRequestParameter?.OrderBy)
-                    .Search(diaryRequestParameter?.SearchDiaryName)
+                    .Sort(diaryRequestParameter.OrderBy)
+                    .Search(diaryRequestParameter.SearchDiaryName)
                     .ToListAsync();
 
             return PagedList<DiarY>

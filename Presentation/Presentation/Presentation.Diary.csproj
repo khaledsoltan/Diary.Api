@@ -4,8 +4,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <DocumentationFile>D:\BaseArchitecture\Diary\Presentation\Presentation\Documentation\Presentation.xml</DocumentationFile>
+	<WarningsAsErrors>Nullable</WarningsAsErrors>
+	 <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	 <DocumentationFile>D:\BaseArchitecture\Diary\Api.Host\bin\Debug\net6.0\Presentation.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

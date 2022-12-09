@@ -9,19 +9,27 @@ using System.Threading.Tasks;
 
 namespace Presentation.ActionFilters
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ValidationFilterAttribute : IActionFilter
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public ValidationFilterAttribute()
         {
         }
+        /// <inheritdoc/>
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
             var action = context.RouteData.Values["action"];
             var controller = context.RouteData.Values["controller"];
 
-            var param = context.ActionArguments
-                .SingleOrDefault(x => x.Value.ToString().Contains("Dto")).Value;
+           
+            var param = context.ActionArguments.Values?.Contains("Dto");
+
             if (param is null)
             {
                 context.Result = new BadRequestObjectResult($"Object is null. Controller: {controller}, action: {action}");
@@ -31,6 +39,7 @@ namespace Presentation.ActionFilters
             if (!context.ModelState.IsValid)
                 context.Result = new UnprocessableEntityObjectResult(context.ModelState);
         }
+/// <inheritdoc/>
 
         public void OnActionExecuted(ActionExecutedContext context) { }
     }

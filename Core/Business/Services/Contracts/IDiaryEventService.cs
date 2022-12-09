@@ -13,7 +13,7 @@ namespace Business.Diary.Services.Contracts
     {
         void CreateDiaryEvent(Guid diaryId, DiaryEventDto diaryEventDto, bool treackChange);
         Task<DiaryEventDto> UpdateDiaryEvent(Guid DiaryId, Guid DiaryEventId, DiaryEventDto diaryEventDto, bool treackChangeDiary, bool treackChangeEvent);
-        void DeleteDiaryEvent(Guid DiaryEventId, bool trackChanges);
+        void DeleteDiaryEvent(Guid diaryId, Guid DiaryEventId, bool trackChanges);
         Task<(IEnumerable<DiaryEventDto> events, MetaData metaData)> GetDiaryEventsRecentlyChanged(Guid diaryId, DiaryEventsParameters diaryEventsParameters, bool trackchange);
         Task<(MetaData metaData, IEnumerable<DiaryEventDto> diaries)> GetDiaryEventsByDate(Guid diaryId, DiaryEventsParameters diaryEventsParameters, DateTime FromDate, DateTime ToDate, bool trackchange);
         Task<(MetaData metaData, IEnumerable<DiaryEventDto>? events)> GetDaysInMonthWithEvents(Guid diaryId, Guid EventId, DiaryEventsParameters diaryEventsParameters, int Month, int Year, bool trackchange);

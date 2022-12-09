@@ -176,7 +176,7 @@ namespace Api.Host.Extensions
 
                 });
                 
-                var xmlFile = $"{typeof(Presentation.AssemblyReference).Assembly.GetName().Name}.xml";
+                var xmlFile = $"Presentation.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 s.IncludeXmlComments(xmlPath);
 

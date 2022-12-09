@@ -10,11 +10,6 @@ namespace Shared.RequestParameters.Diary
     {
         public DiaryRequestParameter() => OrderBy = "DiaryName";
 
-        public DateTime? FromDate{ get; set; }
-        public DateTime?ToDate { get; set; } 
-
-        public bool ValidDateRange => ToDate > FromDate;
-
         public string? SearchDiaryName { get; set; }
     }
 }

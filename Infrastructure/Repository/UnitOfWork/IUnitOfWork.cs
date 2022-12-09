@@ -10,8 +10,8 @@ namespace Repository.UnitOfWork
     public interface IUnitOfWork
     {
         IDiaryRepository Diary { get; }
-
         IDiaryEventRepository DiaryEvent { get; }
+        IDiaryEntryRepository DiaryEntry { get; }
         Task CompleteAsync();
 
     }

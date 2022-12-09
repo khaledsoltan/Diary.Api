@@ -12,8 +12,8 @@ namespace Repository.Diary.Extensions.RepositoryExtensions
   
     public static class DiaryRepositoryExtension
     {
-        public static IQueryable<DiarY> FilterDiaries(this IQueryable<DiarY> diarys,DateTime? fromDate, DateTime? toDate) =>
-            diarys.Where(e => (e.CreatedDate >= fromDate && e.CreatedDate <= toDate));
+        //public static IQueryable<DiarY> FilterDiaries(this IQueryable<DiarY> diarys,DateTime? fromDate, DateTime? toDate) =>
+        //    diarys.Where(e => (e.CreatedDate >= fromDate && e.CreatedDate <= toDate));
 
         public static IQueryable<DiarY> Search(this IQueryable<DiarY> diarys, string searchDiaryName)
         {

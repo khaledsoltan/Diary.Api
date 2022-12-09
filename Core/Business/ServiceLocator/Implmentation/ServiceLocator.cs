@@ -27,16 +27,21 @@ namespace Business.ServiceLocator.Implmentation
         private readonly Lazy<IAuthenticationService> _authenticationService;
         private readonly Lazy<IDiaryService> _diaryService;
         private readonly Lazy<IDiaryEventService> _diaryeventService;
+        private readonly Lazy<IDiaryEntryService> _diaryEntryService;
 
         public ServiceLocator(IUnitOfWork repository, ILoggerManager logger , IMapper mapper, UserManager<User> userManager, IOptions<JwtConfiguration> configuration, IValidateIFexists ValidateIFexists)
         {
             _authenticationService = new Lazy<IAuthenticationService>(() => new AuthenticationService(logger, mapper, userManager, configuration));
-            _diaryService = new Lazy<IDiaryService>(() => new DiaryService(repository, logger, mapper));
+            _diaryService = new Lazy<IDiaryService>(() => new DiaryService(repository, logger, mapper, ValidateIFexists));
             _diaryeventService = new Lazy<IDiaryEventService>(() => new DiaryEventService(repository, logger, mapper, ValidateIFexists));
+            _diaryEntryService = new Lazy<IDiaryEntryService>(() => new DiaryEntryService(repository, logger, mapper, ValidateIFexists));
         }
 
         public IDiaryService DiaryService => _diaryService.Value;
         public IDiaryEventService DiaryEventService => _diaryeventService.Value;
+
+        public IDiaryEntryService DiaryEntryService => _diaryEntryService.Value;
+        
         public IAuthenticationService AuthenticationService => _authenticationService.Value;
 
     }

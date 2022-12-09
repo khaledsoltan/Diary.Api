@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.DTOS.DiaryDto
+namespace Presentation.Diary.Controllers
 {
-    public record DiaryDto(Guid Id, string DiaryName,  DateTime CreatedDate);
-
+    internal class DiaryEventController
+    {
+    }
 }

@@ -4,6 +4,22 @@
         <name>Presentation.Diary</name>
     </assembly>
     <members>
+        <member name="T:Presentation.ActionFilters.ValidationFilterAttribute">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Presentation.ActionFilters.ValidationFilterAttribute.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Presentation.ActionFilters.ValidationFilterAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Presentation.ActionFilters.ValidationFilterAttribute.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <inheritdoc/>
+        </member>
         <member name="T:Presentation.Diary.Controllers.DiaryController">
             <summary>
             
@@ -12,20 +28,70 @@
         </member>
         <member name="M:Presentation.Diary.Controllers.DiaryController.#ctor(Business.ServiceLocator.Contracts.IServiceLocator)">
             <summary>
-            
+            Diary Contains details of all  Diary users, their DiaryId, and names.
+            These Apis do most of the work of holding diary data , retrieving and storing
             </summary>
         </member>
         <member name="M:Presentation.Diary.Controllers.DiaryController.GetDiaries(Shared.RequestParameters.Diary.DiaryRequestParameter)">
             <summary>
-            GetDiaries 
+            @desc Get an List of Diaries split into groups the length of `PageSize`.
             </summary>
-            <returns></returns>
+            <param name="diaryRequestParameters">
+            * PageNumber : For get  page number needed
+            * PageSize : For get length of pages
+            * OrderBy : For sorting entities by one field or more . 
+              example : orderBy=name,age desc. 
+              @note : (Please leave a space between fields and orderBy type)               
+            * Fields : For get specific fields from entity
+            * SearchDiaryName : For search by diaryName
+            </param>
+            <returns>
+            Return 
+            * List Of DiaryDtoS.
+            * Return all links describe all behaviors related Diary
+            * Return IsSuccess bool type for get response result true or false.
+            </returns>
+            
         </member>
-        <member name="M:Presentation.Diary.Controllers.DiaryController.CreateDiary(Shared.DTOS.DiaryDto.DiaryDto)">
+        <member name="M:Presentation.Diary.Controllers.DiaryController.CreateDiary(Shared.DTOS.DiaryDto.DiaryDtoForCreate)">
             <summary>
-            Create Diary 
+            @desc CreateDiary an List of Diaries.
             </summary>
-            <returns></returns>
+            <param name="diaryDtoForCreate">
+            * DiaryName : For Create DiaryName
+            </param>
+            <returns>
+            Return 
+            * Return DiaryDto Created.
+            * Return IsSuccess bool type for get response result true or false.
+            * Return all links describe all behaviors related Diary
+            </returns>
+            
+        </member>
+        <member name="M:Presentation.Diary.Controllers.DiaryController.DeleteDiaryForUser(System.Guid)">
+            <summary>
+            @desc DeleteDiaryForUser for delete diaryentity by diaryId.
+            </summary>
+            <param name="DiaryId">
+            * DiaryName : For Get Diaryentity
+            </param>
+            <returns>
+            Return 
+            * Return DiaryDto Deleted.
+            </returns>
+            
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Presentation.Diary.Controllers.DiaryController.UpdateDiary(System.Guid,Shared.DTOS.DiaryDto.UpdateDiaryDto)" -->
+        <member name="M:Presentation.Diary.Controllers.DiaryController.GetDiaryById(System.Guid)">
+            <summary>
+            Get Diary  By Id.
+            </summary>
+            <param name="DiaryId">
+            * DiaryId : For get diaryentity 
+            </param>
+            Return DiaryDto Entity.
+            * Return IsSuccess bool type for get response result true or false.
+            * Return all links describe all behaviors related Diary
         </member>
     </members>
 </doc>

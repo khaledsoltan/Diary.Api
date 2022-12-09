@@ -11,6 +11,7 @@ namespace Business.Diary.GenericServices.Contracts
     {
         Task<DiarY> GetDiaryAndCheckIfExists(Guid diaryId, bool trackChange);
         Task<DiaryEvent> GetDiaryEventAndCheckIfExists(Guid diaryId, Guid diaryEventId, bool trackChange);
+        Task<DiaryEntry> GetDiarEntryAndCheckIfExists(Guid diaryId, Guid diaryEntry, bool trackChange);
 
     }
 }

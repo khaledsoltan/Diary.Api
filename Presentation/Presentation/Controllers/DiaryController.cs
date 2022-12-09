@@ -1,6 +1,8 @@
 ﻿using Business.ServiceLocator.Contracts;
+using Domain.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Presentation.ActionFilters;
 using Presentation.Controllers.Base;
 using Shared.DTOS.DiaryDto;
@@ -10,6 +12,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Data;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
@@ -19,12 +22,11 @@ namespace Presentation.Diary.Controllers
 {
 
 
-   
-    /// <summary>
-    /// 
-    /// </summary>
-    /// 
 
+    /// <summary>
+    /// Diary Contains details of all  Diary users, their DiaryId, and names.
+    /// These Apis do most of the work of holding diary data , retrieving and storing
+    /// </summary>
     [Authorize]
     [Route("api/Diaries")]
     [ApiController]
@@ -32,62 +34,130 @@ namespace Presentation.Diary.Controllers
     public class DiaryController : ControllerBase
     {
 
-        public const string GetAllDiaries = nameof(GetAllDiaries);
-        public const string CreateDiaryForUser = nameof(CreateDiaryForUser);
-        public const string DeleteDiary = nameof(DeleteDiary);
-        public const string UpdateDiaryForUser = nameof(UpdateDiaryForUser);
+        public const string H_GetAllDiaries = nameof(H_GetAllDiaries);
+        public const string H_GetDiaryById = nameof(H_GetDiaryById);
+        public const string H_CreateDiaryForUser = nameof(H_CreateDiaryForUser);
+        public const string H_DeleteDiary = nameof(H_DeleteDiary);
+        public const string H_UpdateDiaryForUser = nameof(H_UpdateDiaryForUser);
 
 
         
         private readonly IServiceLocator _service;
 
         /// <summary>
-        /// 
+        /// Diary Contains details of all  Diary users, their DiaryId, and names.
+        /// These Apis do most of the work of holding diary data , retrieving and storing
         /// </summary>
         public DiaryController(IServiceLocator service) => _service = service;
 
         /// <summary>
-        /// GetDiaries 
+        /// @desc Get an List of Diaries split into groups the length of `PageSize`.
         /// </summary>
-        /// <returns></returns>
-        [HttpGet(Name = GetAllDiaries)]
-        public async Task<IActionResult> GetDiaries([FromQuery] DiaryRequestParameter diaryRequestParameter)
-        {
-            var pagedResult = await  _service.DiaryService.GetAllDiariesByUserId(diaryRequestParameter , trackChanges: false);
-            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedResult.metaData));
+        /// <param name="diaryRequestParameters">
+        /// * PageNumber : For get  page number needed
+        /// * PageSize : For get length of pages
+        /// * OrderBy : For sorting entities by one field or more . 
+        ///   example : orderBy=name,age desc. 
+        ///   @note : (Please leave a space between fields and orderBy type)               
+        /// * Fields : For get specific fields from entity
+        /// * SearchDiaryName : For search by diaryName
+        /// </param>
+        /// <returns>
+        /// Return 
+        /// * List Of DiaryDtoS.
+        /// * Return all links describe all behaviors related Diary
+        /// * Return IsSuccess bool type for get response result true or false.
+        /// </returns>
+        /// 
 
+
+        [HttpGet(Name = H_GetAllDiaries)]
+        public async Task<IActionResult> GetDiaries([FromQuery] DiaryRequestParameter diaryRequestParameters)
+        {
+            var pagedResult = await  _service.DiaryService.GetAllDiariesByUserId(diaryRequestParameters, trackChanges: false);
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedResult.metaData));
             return Ok(pagedResult.diaries);
         }
 
+
         /// <summary>
-        /// Create Diary 
+        /// @desc CreateDiary an List of Diaries.
         /// </summary>
-        /// <returns></returns>
-        [HttpPost(Name = CreateDiaryForUser)]
-        public async Task<IActionResult> CreateDiary(DiaryDto diaryDto)
+        /// <param name="diaryDtoForCreate">
+        /// * DiaryName : For Create DiaryName
+        /// </param>
+        /// <returns>
+        /// Return 
+        /// * Return DiaryDto Created.
+        /// * Return IsSuccess bool type for get response result true or false.
+        /// * Return all links describe all behaviors related Diary
+        /// </returns>
+        /// 
+        [HttpPost(Name = H_CreateDiaryForUser)]
+        public async Task<IActionResult> CreateDiary(DiaryDtoForCreate diaryDtoForCreate)
         {
-            var baseResult =  _service.DiaryService.CreateDiary(diaryDto);
+            var result =await  _service.DiaryService.CreateDiary(diaryDtoForCreate);
 
-            return Ok(baseResult);
+            return Ok(result);
         }
-        [HttpDelete(Name = DeleteDiary)]
+        /// <summary>
+        /// @desc DeleteDiaryForUser for delete diaryentity by diaryId.
+        /// </summary>
+        /// <param name="id">
+        /// * DiaryName : For Get Diaryentity
+        /// </param>
+        /// <returns>
+        /// Return 
+        /// * Return DiaryDto Deleted.
+        /// </returns>
+        /// 
+        [HttpDelete("DeleteDiaryForUser" , Name = H_DeleteDiary)]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
 
-        public IActionResult DeleteDiaryForUser(Guid DiaryId)
+        public async Task<IActionResult> DeleteDiaryForUser(Guid id)
         {
-            _service.DiaryService.DeleteDiaryForUser(DiaryId, User.FindFirstValue(ClaimTypes.NameIdentifier), trackChanges: false);
-            return Content("Delete Sucsseful");
+            var result = await _service.DiaryService.DeleteDiaryForUser(id, trackChanges: false);
+            return Ok(result);
         }
 
-        [HttpPut("UpdateDiary",Name = UpdateDiaryForUser)]
+        /// <summary>
+        /// @desc UpdateDiary for update diaryentity by diaryId
+        /// </summary>
+        /// <param name="id">
+        /// * id : For Get Diaryentity
+        /// </param>
+        /// <param name="updateDiaryDto">
+        /// * updateDiaryDto : object  for pass values updateing. 
+        /// </param>
+        /// <returns>
+        /// * Return DiaryDto Created.
+        /// * Return IsSuccess bool type for get response result true or false.
+        /// * Return all links describe all behaviors related Diary
+        /// 
+        [HttpPut("UpdateDiary",Name = H_UpdateDiaryForUser)]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
-        public IActionResult UpdateDiary(Guid DiaryId, [FromBody] UpdateDiaryDto UpdateDiaryDto)
+        public async Task<IActionResult> UpdateDiary(Guid id, [FromBody] UpdateDiaryDto updateDiaryDto)
         {
 
-            _service.DiaryService.UpdateDiary(DiaryId, User.FindFirstValue(ClaimTypes.NameIdentifier), UpdateDiaryDto, true);
+          var result = await  _service.DiaryService.UpdateDiary(id, updateDiaryDto, true);
 
-            return Content("Updated Succesfully");
+            return Ok(result);
         }
-
+        /// <summary>
+        /// Get Diary  By Id.
+        /// </summary>
+        /// <param name="id">
+        /// * DiaryId : For get diaryentity 
+        /// </param>
+        /// Return DiaryDto Entity.
+        /// * Return IsSuccess bool type for get response result true or false.
+        /// * Return all links describe all behaviors related Diary
+        [HttpGet("GetDiaryById", Name = H_GetDiaryById)]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
+        public async Task<IActionResult> GetDiaryById(Guid id)
+        {
+            var result = await _service.DiaryService.GetDiaryById(id, trackChanges: false);
+            return Ok(result);
+        }
     }
 }

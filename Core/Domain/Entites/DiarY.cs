@@ -15,12 +15,11 @@ namespace Api.Host.Domain.Entites
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        [Required(ErrorMessage = "WorkSpace name is a required field.")]
+        [Required(ErrorMessage = "DiaryName name is a required field.")]
         [MaxLength(100, ErrorMessage = "Maximum length for the UserName is (100) characters.")]
         public string? DiaryName { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
-
         [MaxLength(450)]
         [ForeignKey(nameof(User))]
         public string? UserId { get; set; }

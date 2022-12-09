@@ -17,8 +17,8 @@ namespace Business.Diary.Profiles.DiaryProfile
         public DiaryProfile()
         {
             CreateMap<DiaryDto, DiarY>().ReverseMap();
-
+            CreateMap<DiaryDtoForCreate, DiarY>().ReverseMap();
+            CreateMap<UpdateDiaryDto, DiarY>().ReverseMap();
         }
-
     }
 }

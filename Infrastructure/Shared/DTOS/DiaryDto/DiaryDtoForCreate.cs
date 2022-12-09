@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Shared.DTOS.DiaryDto
 {
-    public record DiaryDto(Guid Id, string DiaryName,  DateTime CreatedDate);
+    public record DiaryDtoForCreate(string DiaryName);
 
 }

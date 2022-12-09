@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.DTOS.DiaryDto
+namespace Business.Diary.Services.Implmentation
 {
-    public record DiaryDto(Guid Id, string DiaryName,  DateTime CreatedDate);
-
+    internal class DiaryContactService
+    {
+    }
 }

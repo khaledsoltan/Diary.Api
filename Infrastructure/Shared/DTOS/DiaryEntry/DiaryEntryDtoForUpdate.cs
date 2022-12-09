@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.DTOS.DiaryDto
+namespace Shared.DTOS.DiaryEntry
 {
-    public record DiaryDto(Guid Id, string DiaryName,  DateTime CreatedDate);
-
+    public record DiaryEntryDtoForUpdate : DiaryEntryDtoForCreate
+    {
+    }
 }

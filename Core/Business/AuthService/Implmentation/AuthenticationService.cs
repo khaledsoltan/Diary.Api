@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net.Sockets;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -26,8 +27,8 @@ namespace Business.AuthService.Implmentation
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly JwtConfiguration _jwtConfiguration;
-        private readonly IOptions<JwtConfiguration> _configuration;
-        private User _user;
+        private readonly IOptions<JwtConfiguration>? _configuration;
+        private User? _user;
 
         public AuthenticationService(ILoggerManager logger, IMapper mapper, UserManager<User> userManager, IOptions<JwtConfiguration> configuration)
         {
@@ -61,33 +62,42 @@ namespace Business.AuthService.Implmentation
             var claims = await GetClaims();
             var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
             var refreshToken = GenerateRefreshToken();
-            _user.RefreshToken  = refreshToken;
-            if (populateExp)
-                _user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
-            await _userManager.UpdateAsync(_user);
+            if(_user != null)
+            {
+                _user.RefreshToken = refreshToken;
+                if (populateExp)
+                    _user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
+                await _userManager.UpdateAsync(_user);
+            }
             var accessToken = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
             return new TokenDto(accessToken, refreshToken);
         }
         private SigningCredentials GetSigningCredentials()
         {
-
-            var key = Encoding.UTF8.GetBytes(_jwtConfiguration.secretKey);
-
+            var secretKey = _jwtConfiguration.secretKey ?? throw new ArgumentNullException($" secretKey is be null");
+            var key = Encoding.UTF8.GetBytes(secretKey);
             var secret = new SymmetricSecurityKey(key);
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
+
         }
         private async Task<List<Claim>> GetClaims()
         {
-            var claims = new List<Claim>
+            var claims = new List<Claim>();
+            if (_user != null)
             {
-                new Claim(ClaimTypes.NameIdentifier,  _user.Id),
-                new Claim(ClaimTypes.Name,  _user.UserName)
-            };
-            var roles = await _userManager.GetRolesAsync(_user);
-            foreach (var role in roles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, role));
+                claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.NameIdentifier,  _user.Id ),
+                    new Claim(ClaimTypes.Name,  _user.UserName)
+                };
+
+                var roles = await _userManager.GetRolesAsync(_user);
+                foreach (var role in roles)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, role));
+                }
             }
+         
             return claims;
         }
 
@@ -122,7 +132,7 @@ namespace Business.AuthService.Implmentation
             ValidateAudience = true,
             ValidateIssuer = true,
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfiguration.secretKey)),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfiguration.secretKey ?? throw new ArgumentNullException($" IssuerSigningKey is be null"))),
             ValidateLifetime = true,
             ValidIssuer = _jwtConfiguration.ValidIssuer,
             ValidAudience = _jwtConfiguration.ValidAudience

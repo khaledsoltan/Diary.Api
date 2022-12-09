@@ -19,9 +19,10 @@ namespace Api.Host.Domain.Entites
 
         public string? EntryText { get; set; }
 
-        public DateTime DataChanged { get; set; }
+        public DateTime UpdatedDate { get; set; }
 
-  
+        public DateTime CreatedDate { get; set; }
+
         public DiarY? Diary { get; set; }
     }
 }

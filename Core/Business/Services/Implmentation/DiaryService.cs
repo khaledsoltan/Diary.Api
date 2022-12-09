@@ -1,6 +1,8 @@
 ﻿using Api.Host.Domain.Entites;
 using AutoMapper;
+using Business.Diary.GenericServices.Contracts;
 using Business.Diary.Services.Contracts;
+using Domain.Responses;
 using Repository.UnitOfWork;
 using Shared.DTOS.DiaryDto;
 using Shared.LoggerService;
@@ -19,54 +21,63 @@ namespace Business.Diary.Services.Implmentation
         private readonly IUnitOfWork _repository;
         private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
+        private readonly IValidateIFexists _getEntityAndCheckIfExists;
 
-        public DiaryService(IUnitOfWork repository, ILoggerManager logger, IMapper mapper)
+
+        public DiaryService(IUnitOfWork repository, ILoggerManager logger, IMapper mapper, IValidateIFexists validateIFexists)
         {
             _repository = repository;
             _logger = logger;
             _mapper = mapper;
-
+            _getEntityAndCheckIfExists = validateIFexists;
         }
 
-        public DiaryDto CreateDiary(DiaryDto diaryForCreationDto)
+        public async Task<DiaryDto> CreateDiary(DiaryDtoForCreate diaryForCreationDto)
         {
             var diaryEntity = _mapper.Map<DiarY>(diaryForCreationDto);
             _repository.Diary.CreateDiary(diaryEntity);
-            _repository?.CompleteAsync();
+            await _repository.CompleteAsync();
             var diaryToReturn = _mapper.Map<DiaryDto>(diaryEntity);
-            return  diaryToReturn;
+            return diaryToReturn;
         }
-      
+
+        
         public async Task<(IEnumerable<DiaryDto> diaries, MetaData metaData)> GetAllDiariesByUserId(DiaryRequestParameter diaryRequestParameter, bool trackChanges)
         {
-            //if (!diaryRequestParameter.ValidDateRange)
-            //    throw new Exception();
-
+     
             var diariesWithMetaData = await _repository.Diary.GetAllDiariesByUserId(diaryRequestParameter, trackChanges);
 
-            var employeesDto = _mapper.Map<IEnumerable<DiaryDto>>(diariesWithMetaData);
+            var diariesDto = _mapper.Map<IEnumerable<DiaryDto>>(diariesWithMetaData);
 
-            return (employees: employeesDto, metaData: diariesWithMetaData.MetaData);
+            return (diaries: diariesDto, metaData: diariesWithMetaData.MetaData);
         }
-        public async void DeleteDiaryForUser(Guid DiaryId, string Userid, bool trackChanges)
+        public async Task<DiaryDto> DeleteDiaryForUser(Guid DiaryId, bool trackChanges)
         {
-            var diaryForDelete = await _repository.Diary.GetDiaryByIdAndUserId(DiaryId, trackChanges);
-            if (diaryForDelete is null)
-                throw new Exception();
+            var diaryForDelete = await _getEntityAndCheckIfExists.GetDiaryAndCheckIfExists(DiaryId, trackChanges);
             _repository.Diary.DeleteDiary(diaryForDelete);
             _repository?.CompleteAsync();
+            var diaryToReturn = _mapper.Map<DiaryDto>(diaryForDelete);
+            return diaryToReturn;
+
         }
 
-        public async Task<DiaryDto> UpdateDiary(Guid DiaryId, string Userid, UpdateDiaryDto UpdateDiaryDto, bool trackChanges)
+        public async Task<DiaryDto> UpdateDiary(Guid DiaryId, UpdateDiaryDto UpdateDiaryDto, bool trackChanges)
         {
-            var diaryrntity = await _repository.Diary.GetDiaryByIdAndUserId(DiaryId, trackChanges);
+            var diaryrntity = await _getEntityAndCheckIfExists.GetDiaryAndCheckIfExists(DiaryId, trackChanges);
+            diaryrntity.UpdatedDate = DateTime.UtcNow;
             _mapper.Map(UpdateDiaryDto, diaryrntity);
             _repository?.CompleteAsync();
             var diaryDtoDto = _mapper.Map<DiaryDto>(diaryrntity);
             return diaryDtoDto;
 
         }
+        public async Task<DiaryDto> GetDiaryById(Guid DiaryId, bool trackChanges)
+        {
+            var diaryrntity = await _getEntityAndCheckIfExists.GetDiaryAndCheckIfExists(DiaryId, trackChanges);
+            var diaryToReturn = _mapper.Map<DiaryDto>(diaryrntity);
+            return diaryToReturn;
+        }
 
-      
+
     }
 }

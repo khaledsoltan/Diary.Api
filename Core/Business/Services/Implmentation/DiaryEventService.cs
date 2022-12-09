@@ -48,10 +48,7 @@ namespace Business.Diary.Services.Implmentation
             _repository?.CompleteAsync();
         }
 
-        public void DeleteDiaryEvent(Guid DiaryEventId, bool trackChanges)
-        {
-            throw new NotImplementedException();
-        }
+      
 
         public async Task<(MetaData metaData ,IEnumerable<DiaryEventDto>? events)> GetDaysInMonthWithEvents(Guid diaryId, Guid EventId, DiaryEventsParameters diaryEventsParameters, int Month, int Year, bool trackchange)
         {

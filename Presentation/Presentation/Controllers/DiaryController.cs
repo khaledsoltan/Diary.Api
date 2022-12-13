@@ -71,7 +71,7 @@ namespace Presentation.Diary.Controllers
         /// 
 
 
-        [HttpGet(Name = H_GetAllDiaries)]
+        [HttpGet("GetDiaries", Name = H_GetAllDiaries)]
         public async Task<IActionResult> GetDiaries([FromQuery] DiaryRequestParameter diaryRequestParameters)
         {
             var pagedResult = await  _service.DiaryService.GetAllDiariesByUserId(diaryRequestParameters, trackChanges: false);
@@ -93,7 +93,7 @@ namespace Presentation.Diary.Controllers
         /// * Return all links describe all behaviors related Diary
         /// </returns>
         /// 
-        [HttpPost(Name = H_CreateDiaryForUser)]
+        [HttpPost("CreateDiary" , Name = H_CreateDiaryForUser)]
         public async Task<IActionResult> CreateDiary(DiaryDtoForCreate diaryDtoForCreate)
         {
             var result =await  _service.DiaryService.CreateDiary(diaryDtoForCreate);

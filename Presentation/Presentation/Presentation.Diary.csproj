@@ -33,7 +33,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Business\Business.Diary.csproj" />
-    <ProjectReference Include="C:\Users\Khaled Soltan\Downloads\ConfigHatetos\Sciensoft.Hateoas-main\src\Sciensoft.Hateoas\Configure.Hateoas.csproj" />
   </ItemGroup>
 
 </Project>

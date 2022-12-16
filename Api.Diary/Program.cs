@@ -1,5 +1,5 @@
 
-using Api.Diary.Utility.HatetosLinks.Diary;
+//using Api.Diary.Utility.HatetosLinks.Diary;
 using Api.Host.Extensions;
 using AspNetCoreRateLimit;
 using Business.GenericServices.Contracts;
@@ -60,7 +60,7 @@ builder.Services.AddMemoryCache();
 builder.Services.ConfigureJWT(builder.Configuration);
 builder.Services.AddJwtConfiguration(builder.Configuration);
 builder.Services.ConfigureSwagger();
-builder.Services.AddDiaryLinks();
+//builder.Services.AddDiaryLinks();
 //builder.Services.AddDiaryEventsEvents();
 //builder.Services.AddDiaryEntriesLinks();
 builder.Services.ConfigureValidateIFexists();

@@ -19,20 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Infrastructure\Sh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.Diary", "Presentation\Presentation\Presentation.Diary.csproj", "{EFC6D99D-35AE-42DB-AA28-61B4B732AB21}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit.Tests", "Unit.Tests", "{5D3B9E55-CDE5-49B3-98EE-38164BFB39C8}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Diary", "Api.Diary\Api.Diary.csproj", "{1499FDFC-D601-4211-8F90-AAD8AD06AA9C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hateoas.Extension", "Presentation\Hateoas.Extension\Hateoas.Extension.csproj", "{575C4CF2-AC92-4A9C-AFB9-85329FA0AC35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diary.UnitTests", "Diary.UnitTests\Diary.UnitTests.csproj", "{42FA7C31-355C-47C9-8CD4-067311B3569A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Diary", "Client.Diary\Client.Diary.csproj", "{CE1D03BA-A218-4426-A109-1707E346F5E9}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OIDC.Diary", "OIDC.Diary\OIDC.Diary.csproj", "{8B54F44F-C201-492D-BBB2-62550EA8C9D9}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OIDC", "OIDC", "{ECD75725-BB6E-4A93-9DC5-9549916E09FB}"
-EndProject
+
+
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

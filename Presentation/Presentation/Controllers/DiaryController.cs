@@ -27,7 +27,7 @@ namespace Presentation.Diary.Controllers
     /// Diary Contains details of all  Diary users, their DiaryId, and names.
     /// These Apis do most of the work of holding diary data , retrieving and storing
     /// </summary>
-    [Authorize]
+    //[Authorize]
     [Route("api/Diaries")]
     [ApiController]
     [ResponseCache(CacheProfileName = "120SecondsDuration")]

@@ -213,7 +213,14 @@ namespace Api.Host.Extensions
         public static void ConfigureValidateIFexists(this IServiceCollection services)
             => services.AddScoped<IValidateIFexists, ValidateIFexists>();
 
-   
-            
+
+
+       public static void ConfigureAuthenticationHandler(this IServiceCollection services)
+            => services.AddAuthentication("Bearer")
+            .AddJwtBearer("Bearer", options =>
+            {
+                options.Authority = "https://localhost:5005";
+                options.Audience = "diaryapi";
+            });
     }
 }

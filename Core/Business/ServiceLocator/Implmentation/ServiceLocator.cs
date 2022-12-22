@@ -28,6 +28,7 @@ namespace Business.ServiceLocator.Implmentation
         private readonly Lazy<IDiaryService> _diaryService;
         private readonly Lazy<IDiaryEventService> _diaryeventService;
         private readonly Lazy<IDiaryEntryService> _diaryEntryService;
+        private readonly Lazy<IDiaryContactService> _diaryContactService;
 
         public ServiceLocator(IUnitOfWork repository, ILoggerManager logger , IMapper mapper, UserManager<User> userManager, IOptions<JwtConfiguration> configuration, IValidateIFexists ValidateIFexists)
         {
@@ -35,13 +36,13 @@ namespace Business.ServiceLocator.Implmentation
             _diaryService = new Lazy<IDiaryService>(() => new DiaryService(repository, logger, mapper, ValidateIFexists));
             _diaryeventService = new Lazy<IDiaryEventService>(() => new DiaryEventService(repository, logger, mapper, ValidateIFexists));
             _diaryEntryService = new Lazy<IDiaryEntryService>(() => new DiaryEntryService(repository, logger, mapper, ValidateIFexists));
+            _diaryContactService = new Lazy<IDiaryContactService>(() => new DiaryContactService(repository, logger, mapper, ValidateIFexists));
         }
 
         public IDiaryService DiaryService => _diaryService.Value;
         public IDiaryEventService DiaryEventService => _diaryeventService.Value;
-
         public IDiaryEntryService DiaryEntryService => _diaryEntryService.Value;
-        
+        public IDiaryContactService DiaryContactService => _diaryContactService.Value;
         public IAuthenticationService AuthenticationService => _authenticationService.Value;
 
     }

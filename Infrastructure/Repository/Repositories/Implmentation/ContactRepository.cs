@@ -20,13 +20,17 @@ namespace Repository.Diary.Repositories.Implmentation
         {
 
         }
-        public void CreateContact(Contact contact) => Create(contact);
+        public void CreateContact(Guid diaryId, Contact contact)
+        {
+            contact.DiaryId = diaryId;
+            Create(contact);
+        }
 
-        public async Task<Contact> GetContactByContactId(Guid contactId, bool trackCahnge) => await FindByCondition(x => x.Id == contactId, trackCahnge).SingleOrDefaultAsync();
-        public async Task<Contact> GetContactByAndContactId(Guid contactId, bool trackCahnge) => await FindByCondition(x => x.Id == contactId, trackCahnge).SingleOrDefaultAsync();
-
+        public async Task<Contact> GetContactByContactId(Guid diaryId,Guid contactId, bool trackCahnge) 
+            => await FindByCondition(x => x.DiaryId.Equals(diaryId) && x.Id.Equals(contactId), trackCahnge).SingleOrDefaultAsync();
+       
         public void DeleteContact(Contact contact) => Delete(contact);
-        public async Task<PagedList<Contact>> GetDaysInMonthWithEntries(Guid DiaryId, ContactRequestParameters contactRequestParameters, int Month, int Year, bool trackchange)
+        public async Task<PagedList<Contact>> GetAllContactByDiaryId(Guid DiaryId, ContactRequestParameters contactRequestParameters, bool trackchange)
         {
 
             var diaryEntries = await FindByCondition(x => x.DiaryId == DiaryId, trackchange).ToListAsync();

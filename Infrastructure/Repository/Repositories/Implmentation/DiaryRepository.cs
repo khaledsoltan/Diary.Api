@@ -29,7 +29,7 @@ namespace Repository.Diary.Repositories.Implmentation
 
         public DiaryRepository(RepositoryContext repositoryContext , IHttpContextAccessor httpContextAccessor) : base(repositoryContext)
         {
-            _userId = "ef1ecc2c-978a-47fd-950f-18887c307742";/*httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;*/
+            _userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         }
         public async Task<PagedList<DiarY>> GetAllDiariesByUserId(DiaryRequestParameter diaryRequestParameter, bool trackChanges) {
 

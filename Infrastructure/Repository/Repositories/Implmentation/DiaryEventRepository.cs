@@ -25,7 +25,7 @@ namespace Repository.Diary.Repositories.Implmentation
         } 
 
          public async Task<DiaryEvent>  GetDiaryEventByEventId(Guid diaryId,Guid diaryEventId, bool trackchange)
-                => await FindByCondition(x => x.Id.Equals(diaryEventId) && x.Id.Equals(diaryId), trackchange).SingleOrDefaultAsync();
+                => await FindByCondition(x => x.Id.Equals(diaryEventId) && x.DiaryId.Equals(diaryId), trackchange).SingleOrDefaultAsync();
 
 
         public void DeleteDiaryEvent(DiaryEvent diaryEvent) => Delete(diaryEvent);

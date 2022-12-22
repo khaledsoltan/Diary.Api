@@ -36,7 +36,7 @@ namespace Repository.Diary.Repositories.Implmentation
         public async Task<PagedList<DiaryEntry>> GetDaysInMonthWithEntries(Guid DiaryId, DiaryEntryParameters diaryEntryParameters, int Month, int Year, bool trackchange)
         {
 
-            var diaryEntries = await FindByCondition(x => x.DiaryId.Equals(DiaryId) && x.EntryDate.Month.Equals(Month) && x.EntryDate.Year.Equals(Year), trackchange)
+            var diaryEntries = await FindByCondition(x => x.DiaryId.Equals(DiaryId) && x.CreatedDate.Month.Equals(Month) && x.CreatedDate.Year.Equals(Year), trackchange)
                 .ToListAsync();
 
             return PagedList<DiaryEntry>.ToPagedList(diaryEntries, diaryEntryParameters.PageNumber, diaryEntryParameters.PageSize);
@@ -46,8 +46,7 @@ namespace Repository.Diary.Repositories.Implmentation
         public async Task<PagedList<DiaryEntry>> GetDiaryEntriesByDate(Guid DiaryId, DiaryEntryParameters diaryEntryParameters, DateTime FromDate, DateTime ToDate, bool trackchange)
         {
 
-            var diaryEntries = await FindByCondition(x => x.DiaryId.Equals(DiaryId) && x.EntryDate >= FromDate && x.EntryDate <= ToDate, trackchange).ToListAsync();
-
+            var diaryEntries = await FindByCondition(x => x.DiaryId.Equals(DiaryId) && x.CreatedDate >= FromDate && x.CreatedDate <= ToDate, trackchange).ToListAsync();
 
             return PagedList<DiaryEntry>.ToPagedList(diaryEntries, diaryEntryParameters.PageNumber, diaryEntryParameters.PageSize);
 

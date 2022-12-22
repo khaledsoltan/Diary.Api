@@ -18,6 +18,7 @@ namespace Repository.UnitOfWork
         private readonly Lazy<IDiaryRepository> _diaryRepository;
         private readonly Lazy<IDiaryEventRepository> _diaryEventRepository;
         private readonly Lazy<IDiaryEntryRepository> _diaryEntryRepositoryy;
+        private readonly Lazy<IContactRepository> _contactRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public UnitOfWork(RepositoryContext repositoryContext , IHttpContextAccessor httpContextAccessor)
@@ -26,13 +27,13 @@ namespace Repository.UnitOfWork
             _diaryRepository = new Lazy<IDiaryRepository>(() => new DiaryRepository(repositoryContext, httpContextAccessor));
             _diaryEventRepository = new Lazy<IDiaryEventRepository>(() => new DiaryEventRepository(repositoryContext));
             _diaryEntryRepositoryy = new Lazy<IDiaryEntryRepository>(()=> new DiaryEntryRepository(repositoryContext));
+            _contactRepository = new Lazy<IContactRepository>(() => new ContactRepository(repositoryContext));
         }
-
+        public IContactRepository Contact => _contactRepository.Value;
         public IDiaryRepository Diary => _diaryRepository.Value;
         public IDiaryEventRepository DiaryEvent => _diaryEventRepository.Value;
         public IDiaryEntryRepository DiaryEntry => _diaryEntryRepositoryy.Value;
         public async Task CompleteAsync() => await _repositoryContext.SaveChangesAsync();
-
       
     }
 }

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 namespace Shared.DTOS.DiaryContact
 {
-    public record DiaryContactDto()
+    public class DiaryContactForCreate
     {
-        public Guid Id { get; set; }
-        public Guid DiaryId { get; set; }
         public string? FirstName { get; set; }
+
         public string? LastName { get; set; }
 
         public string? Telephone { get; set; }
@@ -26,7 +26,5 @@ namespace Shared.DTOS.DiaryContact
 
         public string? PostalCode { get; set; }
 
-
     }
-
 }

@@ -1,5 +1,8 @@
 
 //using Api.Diary.Utility.HatetosLinks.Diary;
+using Api.Diary.Utility.HatetosLinks.Diary;
+using Api.Diary.Utility.HatetosLinks.DiaryEntry;
+using Api.Diary.Utility.HatetosLinks.DiaryEvent;
 using Api.Host.Extensions;
 using AspNetCoreRateLimit;
 using Business.GenericServices.Contracts;
@@ -14,6 +17,7 @@ using Microsoft.Extensions.Options;
 using NLog;
 using Presentation.ActionFilters;
 using Presentation.Controllers;
+using Presentation.Diary.Utility.HatetosLinks.DiaryContact;
 using Shared.LoggerService;
 using System.Reflection;
 using System.Text.Json;
@@ -49,6 +53,7 @@ builder.Services.ConfigureVersioning();
 builder.Services.ConfigureRateLimitingOptions();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ValidationFilterAttribute>();
+builder.Services.AddScoped<ValidateMediaTypeAttribute>();
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true;
@@ -57,13 +62,13 @@ builder.Services.AddAuthentication();
 builder.Services.ConfigureIdentity();
 builder.Services.ConfigureResponseCaching();
 builder.Services.AddMemoryCache();
-//builder.Services.ConfigureJWT(builder.Configuration);
-//builder.Services.AddJwtConfiguration(builder.Configuration);
+builder.Services.ConfigureJWT(builder.Configuration);
+builder.Services.AddJwtConfiguration(builder.Configuration);
 builder.Services.ConfigureSwagger();
-builder.Services.ConfigureAuthenticationHandler();
-//builder.Services.AddDiaryLinks();
-//builder.Services.AddDiaryEventsEvents();
-//builder.Services.AddDiaryEntriesLinks();
+builder.Services.AddDiaryLinks();
+builder.Services.AddDiaryEvents();
+builder.Services.AddDiaryEntriesLinks();
+builder.Services.AddDiaryContactLinks();
 builder.Services.ConfigureValidateIFexists();
 var app = builder.Build();
 // Configure the HTTP request pipeline.

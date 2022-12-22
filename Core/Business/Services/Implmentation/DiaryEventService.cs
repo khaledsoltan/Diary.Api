@@ -2,6 +2,7 @@
 using AutoMapper;
 using Business.Diary.GenericServices.Contracts;
 using Business.Diary.Services.Contracts;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Repository.UnitOfWork;
 using Shared.DTOS.DiaryDto;
 using Shared.DTOS.DiaryEvent;
@@ -33,7 +34,7 @@ namespace Business.Diary.Services.Implmentation
             _checkIfExists = validateIFexists;
         }
 
-        public async Task<DiaryEventDto> CreateDiaryEvent(Guid diaryId, DiaryEventDto diaryEventDto, bool treackChange)
+        public async Task<DiaryEventDto> CreateDiaryEvent(Guid diaryId, DiaryEventForCreate diaryEventDto, bool treackChange)
         {
             await  _checkIfExists.GetDiaryAndCheckIfExists(diaryId, treackChange);
             var diaryEvent = _mapper.Map<DiaryEvent>(diaryEventDto);
@@ -80,15 +81,22 @@ namespace Business.Diary.Services.Implmentation
             return (eventsDto, eventsWithMetaData.MetaData);
         }
 
-        public async Task<DiaryEventDto> UpdateDiaryEvent(Guid diaryId, Guid diaryEventId, DiaryEventDto diaryEventDto, bool treackChangeDiary, bool treackChangeEvent)
+        public async Task<DiaryEventDto> UpdateDiaryEvent(Guid diaryId, Guid diaryEventId, DiaryEventForUpdate diaryEventForUpdate, bool treackChangeDiary, bool treackChangeEvent)
         {
             await _checkIfExists.GetDiaryAndCheckIfExists(diaryId, treackChangeDiary);
-            var eventEntity =  _checkIfExists.GetDiaryEventAndCheckIfExists(diaryId, diaryEventId, treackChangeDiary);
-            _mapper.Map(eventEntity, diaryEventDto);
+            var eventEntity = await _checkIfExists.GetDiaryEventAndCheckIfExists(diaryId, diaryEventId, treackChangeDiary);
+            _mapper.Map(eventEntity, diaryEventForUpdate);
             _repository?.CompleteAsync();
             var eventDto = _mapper.Map<DiaryEventDto>(eventEntity);
             return eventDto;
         }
-      
+        public async Task<DiaryEventDto> GetDiaryEventById(Guid DiaryId, Guid DiaryEventId, bool trackChange)
+        {
+            var diaryEventEntity = await _checkIfExists.GetDiaryEventAndCheckIfExists(DiaryId , DiaryEventId, trackChange);
+            var diaryEventDto = _mapper.Map<DiaryEventDto>(diaryEventEntity);
+            return diaryEventDto;
+
+        }
+
     }
 }

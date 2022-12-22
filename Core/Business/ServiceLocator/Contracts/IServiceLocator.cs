@@ -15,7 +15,7 @@ namespace Business.ServiceLocator.Contracts
         IDiaryEventService DiaryEventService { get; }
         IDiaryService DiaryService { get; }
         IDiaryEntryService DiaryEntryService { get; }
-        //IDiaryContactService DiaryContactService { get; }
+        IDiaryContactService DiaryContactService { get; }
 
     }
 }

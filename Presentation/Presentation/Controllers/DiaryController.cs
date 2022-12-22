@@ -27,7 +27,7 @@ namespace Presentation.Diary.Controllers
     /// Diary Contains details of all  Diary users, their DiaryId, and names.
     /// These Apis do most of the work of holding diary data , retrieving and storing
     /// </summary>
-    //[Authorize]
+    [Authorize]
     [Route("api/Diaries")]
     [ApiController]
     [ResponseCache(CacheProfileName = "120SecondsDuration")]
@@ -114,10 +114,10 @@ namespace Presentation.Diary.Controllers
         [HttpDelete("DeleteDiaryForUser" , Name = H_DeleteDiary)]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
 
-        public async Task<IActionResult> DeleteDiaryForUser(Guid id)
+        public async Task<OkApiResponse<string>> DeleteDiaryForUser(Guid id)
         {
             var result = await _service.DiaryService.DeleteDiaryForUser(id, trackChanges: false);
-            return Ok(result);
+            return new OkApiResponse<string>("Deleted Item Sucessufly !!");
         }
 
         /// <summary>

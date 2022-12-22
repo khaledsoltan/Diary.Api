@@ -220,7 +220,7 @@ namespace Api.Host.Extensions
             .AddJwtBearer("Bearer", options =>
             {
                 options.Authority = "https://localhost:5005";
-                options.Audience = "diaryapi";
+                options.Audience = "diaryApi";
             });
     }
 }

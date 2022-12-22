@@ -1,19 +1,25 @@
 ﻿using Configure.Hateoas.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Shared.DTOS.DiaryEntry;
+using Shared.DTOS.DiaryContact;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Api.Diary.Utility.HatetosLinks.DiaryEntry
+namespace Presentation.Diary.Utility.HatetosLinks.DiaryContact
 {
-    public static class DiaryEntryLinks
+
+    public static class DiaryContactLinks
     {
-        public static void AddDiaryEntriesLinks(this IServiceCollection services) =>
+        public static void AddDiaryContactLinks(this IServiceCollection services) =>
           services
             .AddMvc()
             .AddLink(policy =>
             {
                 policy
-                  .AddPolicy<GetDiaryEntryDto>(model =>
+                  .AddPolicy<DiaryContactDto>(model =>
                   {
                       model
                         .AddCustomPath(m => $"/api/Diary/CreatEentryDiary/{m.DiaryId}", "Creat_EntryDiary", method: HttpMethods.Post, message: "@desc (CreatEentryDiary for Create EntryDiary .) @param (DiaryEntryDtoForCreate  diaryEntryDtoForCreate : object  for Create diaryEntity.)  @return (return diaryEntryEntity created and links description  all behaviors related diary.)")

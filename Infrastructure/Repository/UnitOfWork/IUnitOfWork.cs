@@ -12,6 +12,8 @@ namespace Repository.UnitOfWork
         IDiaryRepository Diary { get; }
         IDiaryEventRepository DiaryEvent { get; }
         IDiaryEntryRepository DiaryEntry { get; }
+
+        IContactRepository Contact { get; }
         Task CompleteAsync();
 
     }

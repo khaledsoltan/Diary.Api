@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Business\Business.Diary.csproj" />
+    <ProjectReference Include="..\Hateoas.Extension\Hateoas.Extension.csproj" />
   </ItemGroup>
 
 </Project>

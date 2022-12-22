@@ -12,10 +12,10 @@ namespace Repository.Diary.Repositories.Contracts
 {
     public interface IContactRepository
     {
-        void CreateContact(Contact contact);
-        Task<Contact> GetContactByContactId(Guid contactId, bool trackCahnge);
+        void CreateContact(Guid DiaryId,Contact contact);
         void DeleteContact(Contact contact);
-        Task<Contact> GetContactByAndContactId(Guid contactId, bool trackCahnge);
-        Task<PagedList<Contact>> GetDaysInMonthWithEntries(Guid DiaryId, ContactRequestParameters contactRequestParameters, int Month, int Year, bool trackchange);
+        Task<Contact> GetContactByContactId(Guid diaryId, Guid contactId, bool trackCahnge);
+        Task<PagedList<Contact>> GetAllContactByDiaryId(Guid DiaryId, ContactRequestParameters contactRequestParameters,  bool trackchange);
+
     }
 }

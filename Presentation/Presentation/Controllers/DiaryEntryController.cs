@@ -18,10 +18,9 @@ using System.Threading.Tasks;
 
 namespace Presentation.Diary.Controllers
 {
-
-    [Route("api/[controller]")]
-    [ApiController]
     [Authorize]
+    [Route("api/DiaryEntry")]
+    [ApiController]
     [ResponseCache(CacheProfileName = "120SecondsDuration")]
     public class DiaryEntryController :  ControllerBase
     {
@@ -43,42 +42,39 @@ namespace Presentation.Diary.Controllers
 
         [HttpPost("CreatEentryDiary", Name = CreatEentry_Diary)]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
-        public IActionResult CreatEentryDiary(Guid DiaryId, [FromBody] DiaryEntryDtoForCreate diaryEntrydtoForCreate)
+        public async Task<IActionResult>  CreatEentryDiary(Guid DiaryId, [FromBody] DiaryEntryDtoForCreate diaryEntrydtoForCreate)
         {
-           
-           var result =  _service.DiaryEntryService.CreateDiaryEntry(DiaryId,  diaryEntrydtoForCreate, false);
+           var result = await _service.DiaryEntryService.CreateDiaryEntry(DiaryId,  diaryEntrydtoForCreate, false);
            return Ok(result);
-
         }
 
         [HttpPut("UpdateDiaryForDiaryEntry", Name = Update_DiaryEntry)]
-        public IActionResult UpdateDiaryForDiaryEntry(Guid diaryId, Guid entryId, [FromBody] DiaryEntryDtoForUpdate diaryEntrydto)
+        public async Task<IActionResult> UpdateDiaryForDiaryEntry(Guid diaryId, Guid entryId, [FromBody] DiaryEntryDtoForUpdate diaryEntrydto)
         {
        
-            var result = _service.DiaryEntryService.UpdateDiaryEntry(diaryId, entryId, diaryEntrydto,  false, true);
+            var result =await _service.DiaryEntryService.UpdateDiaryEntry(diaryId, entryId, diaryEntrydto,  false, true);
 
             return Ok(result);
         }
 
         [HttpDelete("DeleteDiaryEntry", Name = Delete_DiaryEntry)]
-        public OkApiResponse<string> DeleteDiaryEntry(Guid diaryId,Guid diaryEntryId)
+        public async Task<OkApiResponse<string>> DeleteDiaryEntry(Guid diaryId,Guid diaryEntryId)
         {
-            _service.DiaryEntryService.DeleteDiaryEntry(diaryId , diaryEntryId, trackChanges: false);
+            await _service.DiaryEntryService.DeleteDiaryEntry(diaryId , diaryEntryId, trackChanges: false);
             return new OkApiResponse<string>("Successfully deleted !");
         }
 
  
 
         [HttpGet("GetDaysInMonthWithEntries", Name = GetDays_InMonthWithEntries)]
-        public async Task<IActionResult> GetDaysInMonthWithEntries(Guid diaryId, [FromQuery] DiaryEntryParameters diaryEntryParameters, int Month, int Year)
+        public async Task<IActionResult> GetDaysInMonthWithEntries(Guid diaryId, int Month, int Year, [FromQuery] DiaryEntryParameters diaryEntryParameters)
         {
             var pagedResult = await _service.DiaryEntryService.GetDaysInMonthWithEntries(diaryId, diaryEntryParameters, Month, Year ,  false);
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedResult.metaData));
             return Ok(pagedResult.diaryEntries);
         }
         [HttpGet("GetDiaryEntriesRecentlyChanged", Name = GetDiaryEntries_RecentlyChanged)]
-
-        public async Task<IActionResult> GetDiaryEntriesRecentlyChanged(Guid diaryId, [FromQuery] DiaryEntryParameters diaryEntryParameters,  DateTime FromDate, DateTime ToDate)
+        public async Task<IActionResult> GetDiaryEntriesRecentlyChanged(Guid diaryId, [FromQuery] DiaryEntryParameters diaryEntryParameters)
         {
             var pagedResult = await _service.DiaryEntryService.GetDiaryEntriesRecentlyChanged(diaryId, diaryEntryParameters,   false);
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedResult.metaData));
@@ -86,7 +82,7 @@ namespace Presentation.Diary.Controllers
         }
 
         [HttpGet("GetDiaryEntriesByDate" , Name = GetDiary_EntriesByDate)]
-        public async Task<IActionResult> GetDiaryEntriesByDate(Guid diaryId, [FromQuery] DiaryEntryParameters diaryEntryParametersDateTime, DateTime FromDate, DateTime ToDate)
+        public async Task<IActionResult> GetDiaryEntriesByDate(Guid diaryId, DateTime FromDate, DateTime ToDate,  [FromQuery] DiaryEntryParameters diaryEntryParametersDateTime)
         {
             var pagedResult = await _service.DiaryEntryService.GetDiaryEntriesByDate(diaryId, diaryEntryParametersDateTime , FromDate, ToDate, false);
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedResult.metaData));

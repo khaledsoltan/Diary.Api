@@ -1,5 +1,6 @@
 ﻿using Api.Host.Domain.Entites;
 using Business.Diary.GenericServices.Contracts;
+using Domain.Diary.Exceptions.ContactExceptions;
 using Domain.Diary.Exceptions.DiaryEntryExceptions;
 using Domain.Diary.Exceptions.DiaryEventExceptions;
 using Domain.Diary.Exceptions.Folder;
@@ -35,6 +36,12 @@ namespace Business.Diary.GenericServices.Implmentation
             var diaryEntry = await _repository.DiaryEntry.GetDiaryEntriesById(diaryId, diaryEntryId, trackChange);
             _ = diaryEntry ?? throw new DiaryEntryNotFoundException(diaryId);
             return diaryEntry;
+        }
+        public async Task<Contact> GetContactAndCheckIfExists(Guid diaryId, Guid contactId, bool trackChange)
+        {
+            var contact = await _repository.Contact.GetContactByContactId(diaryId, contactId, trackChange);
+            _ = contact ?? throw new ContactyNotFoundException(diaryId);
+            return contact;
         }
 
 

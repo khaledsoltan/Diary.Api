@@ -15,7 +15,6 @@ namespace Business.Diary.Profiles.DiaryEntryProfile
         public DiaryEntryProfile()
         {
             CreateMap<DiaryEntryDtoForCreate, DiaryEntry>().ReverseMap();
-            CreateMap<DiaryEntryDtoForUpdate, DiaryEntry>().ReverseMap();
             CreateMap<GetDiaryEntryDto, DiaryEntry>().ReverseMap();
         }
     }

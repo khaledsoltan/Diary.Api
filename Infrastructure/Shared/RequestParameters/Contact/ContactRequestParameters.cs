@@ -8,7 +8,7 @@ namespace Shared.RequestParameters.Contact
 {
     public class ContactRequestParameters : RequestParameters
     {
-        public ContactRequestParameters() => OrderBy = "DiaryName";
+        public ContactRequestParameters() => OrderBy = "contact";
 
         public string? SearchContactName { get; set; }
     }

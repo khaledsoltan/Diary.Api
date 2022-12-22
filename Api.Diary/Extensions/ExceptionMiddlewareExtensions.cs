@@ -1,7 +1,9 @@
 ﻿using Domain.ErrorModel;
 using Domain.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
+using Newtonsoft.Json;
 using Shared.LoggerService;
+using System;
 using System.Net;
 
 namespace Api.Host.Extensions

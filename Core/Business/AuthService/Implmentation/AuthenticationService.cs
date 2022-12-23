@@ -43,8 +43,6 @@ namespace Business.AuthService.Implmentation
         {
             var user = _mapper.Map<User>(userForRegistration);
             var result = await _userManager.CreateAsync(user, userForRegistration.Password);
-            if (result.Succeeded)
-                await _userManager.AddToRolesAsync(user, userForRegistration.Roles);
             return result;
         }
 

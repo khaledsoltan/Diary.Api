@@ -60,7 +60,7 @@ Change connection string
 
 
 ## 🚀 About Me
-I'm a .Net Backend developer with 2 years of experience in software development .
+I'm a .Net Backend developer with 2 years of experience in software  and GIS development.
 
 
 ## 🔗 Links

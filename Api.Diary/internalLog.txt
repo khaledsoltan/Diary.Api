@@ -3095,3 +3095,49 @@ File name: 'NLog.Web.AspNetCore, Culture=neutral, PublicKeyToken=null'
 2022-12-22 16:40:24.1178 Info Registered target FileTarget(Name=alldata)
 2022-12-22 16:40:24.1344 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
 2022-12-22 16:40:24.1582 Info Validating config: TargetNames=alldata, ConfigItems=44, FilePath=D:\Projects\Api.Diary\nlog.config
+2023-04-23 20:37:27.7259 Info Message Template Auto Format enabled
+2023-04-23 20:37:27.7731 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-23 20:37:27.7731 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Error loading extensions: NLog.Web.AspNetCore
+ ---> System.IO.FileNotFoundException: Could not load file or assembly 'NLog.Web.AspNetCore, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.
+File name: 'NLog.Web.AspNetCore, Culture=neutral, PublicKeyToken=null'
+   at System.Reflection.RuntimeAssembly.InternalLoad(ObjectHandleOnStack assemblyName, ObjectHandleOnStack requestingAssembly, StackCrawlMarkHandle stackMark, Boolean throwOnFileNotFound, ObjectHandleOnStack assemblyLoadContext, ObjectHandleOnStack retAssembly)
+   at System.Reflection.RuntimeAssembly.InternalLoad(AssemblyName assemblyName, RuntimeAssembly requestingAssembly, StackCrawlMark& stackMark, Boolean throwOnFileNotFound, AssemblyLoadContext assemblyLoadContext)
+   at System.Reflection.Assembly.Load(String assemblyString)
+   at NLog.Internal.AssemblyHelpers.LoadFromName(String assemblyName)
+   at NLog.Config.LoggingConfigurationParser.ParseExtensionWithAssembly(String assemblyName, String prefix)
+   --- End of inner exception stack trace ---
+2023-04-23 20:37:28.0640 Info Registered target FileTarget(Name=alldata)
+2023-04-23 20:37:28.0858 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2023-04-23 20:37:28.1183 Info Validating config: TargetNames=alldata, ConfigItems=44, FilePath=C:\Users\khaled_soltan06\RiderProjects\Diary.Api\Api.Diary\nlog.config
+2023-04-23 20:37:52.6886 Info AppDomain Shutting down. LogFactory closing...
+2023-04-23 20:37:52.7062 Info LogFactory has been closed.
+2023-04-23 20:38:11.2150 Info Message Template Auto Format enabled
+2023-04-23 20:38:11.2306 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-23 20:38:11.2306 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Error loading extensions: NLog.Web.AspNetCore
+ ---> System.IO.FileNotFoundException: Could not load file or assembly 'NLog.Web.AspNetCore, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.
+File name: 'NLog.Web.AspNetCore, Culture=neutral, PublicKeyToken=null'
+   at System.Reflection.RuntimeAssembly.InternalLoad(ObjectHandleOnStack assemblyName, ObjectHandleOnStack requestingAssembly, StackCrawlMarkHandle stackMark, Boolean throwOnFileNotFound, ObjectHandleOnStack assemblyLoadContext, ObjectHandleOnStack retAssembly)
+   at System.Reflection.RuntimeAssembly.InternalLoad(AssemblyName assemblyName, RuntimeAssembly requestingAssembly, StackCrawlMark& stackMark, Boolean throwOnFileNotFound, AssemblyLoadContext assemblyLoadContext)
+   at System.Reflection.Assembly.Load(String assemblyString)
+   at NLog.Internal.AssemblyHelpers.LoadFromName(String assemblyName)
+   at NLog.Config.LoggingConfigurationParser.ParseExtensionWithAssembly(String assemblyName, String prefix)
+   --- End of inner exception stack trace ---
+2023-04-23 20:38:11.3916 Info Registered target FileTarget(Name=alldata)
+2023-04-23 20:38:11.4030 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2023-04-23 20:38:11.4365 Info Validating config: TargetNames=alldata, ConfigItems=44, FilePath=C:\Users\khaled_soltan06\RiderProjects\Diary.Api\Api.Diary\nlog.config
+2023-04-23 20:42:54.0004 Info AppDomain Shutting down. LogFactory closing...
+2023-04-23 20:42:54.0336 Info LogFactory has been closed.
+2023-04-23 20:43:17.4837 Info Message Template Auto Format enabled
+2023-04-23 20:43:17.4963 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-23 20:43:17.4963 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Error loading extensions: NLog.Web.AspNetCore
+ ---> System.IO.FileNotFoundException: Could not load file or assembly 'NLog.Web.AspNetCore, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.
+File name: 'NLog.Web.AspNetCore, Culture=neutral, PublicKeyToken=null'
+   at System.Reflection.RuntimeAssembly.InternalLoad(ObjectHandleOnStack assemblyName, ObjectHandleOnStack requestingAssembly, StackCrawlMarkHandle stackMark, Boolean throwOnFileNotFound, ObjectHandleOnStack assemblyLoadContext, ObjectHandleOnStack retAssembly)
+   at System.Reflection.RuntimeAssembly.InternalLoad(AssemblyName assemblyName, RuntimeAssembly requestingAssembly, StackCrawlMark& stackMark, Boolean throwOnFileNotFound, AssemblyLoadContext assemblyLoadContext)
+   at System.Reflection.Assembly.Load(String assemblyString)
+   at NLog.Internal.AssemblyHelpers.LoadFromName(String assemblyName)
+   at NLog.Config.LoggingConfigurationParser.ParseExtensionWithAssembly(String assemblyName, String prefix)
+   --- End of inner exception stack trace ---
+2023-04-23 20:43:17.6272 Info Registered target FileTarget(Name=alldata)
+2023-04-23 20:43:17.6370 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2023-04-23 20:43:17.6528 Info Validating config: TargetNames=alldata, ConfigItems=44, FilePath=C:\Users\khaled_soltan06\RiderProjects\Diary.Api\Api.Diary\nlog.config

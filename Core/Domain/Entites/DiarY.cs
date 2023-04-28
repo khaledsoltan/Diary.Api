@@ -23,9 +23,7 @@ namespace Api.Host.Domain.Entites
         [MaxLength(450)]
         [ForeignKey(nameof(User))]
         public string? UserId { get; set; }
-
         public User? User { get; set; }
-
         public ICollection<DiaryEvent>? DiaryEvents { get; set; }
         public ICollection<DiaryEntry>? DiaryEntries { get; set; }
         public ICollection<Contact>? Contacts { get; set; }

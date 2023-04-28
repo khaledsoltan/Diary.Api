@@ -151,64 +151,7 @@ namespace Api.Host.Extensions
                     services.Configure<JwtConfiguration>(configuration.GetSection("JwtSettings"));
 
 
-        public static void ConfigureSwagger(this IServiceCollection services)
-        {
-            services.AddSwaggerGen(s =>
-            {
-                s.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Title = "OnlineDiary Api",
-                    Version = "v1",
-                    Description = "OnlineDiary API by Khaled Soltan",
-                    TermsOfService = new Uri("https://www.linkedin.com/in/khaled-soltan/"),
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Khaled soltan",
-                        Email = "khaled.soltan.taha@gmail.com",
-                        Url = new Uri("https://www.linkedin.com/in/khaled-soltan/"),
-                    },
-                    License = new OpenApiLicense
-                    {
-                        Name = "OnlineDiary API LICX",
-                        Url = new Uri("https://example.com/license"),
-                    }
-
-
-                });
-                
-                var xmlFile = $"Presentation.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                s.IncludeXmlComments(xmlPath);
-
-                s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    In = ParameterLocation.Header,
-                    Description = "Place to add JWT with Bearer",
-                    Name = "Authorization",
-                    Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer"
-                });
-                s.AddSecurityRequirement(new OpenApiSecurityRequirement()
-                {
-                   {
-                     new OpenApiSecurityScheme
-                     {
-                          Reference = new OpenApiReference
-                          {
-                             Type = ReferenceType.SecurityScheme,
-                             Id = "Bearer"
-                          },
-                             Name = "Bearer",
-                          },
-                            new List<string>()
-                           }
-                    });
-                });
-
-         
-
-
-        }
+    
 
         public static void ConfigureValidateIFexists(this IServiceCollection services)
             => services.AddScoped<IValidateIFexists, ValidateIFexists>();

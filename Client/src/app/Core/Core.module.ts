@@ -9,5 +9,5 @@ import { AuthUseCase } from "./UseCase/auth.usecase";
 
 })
 
-
+   
 export class CoreModule { }

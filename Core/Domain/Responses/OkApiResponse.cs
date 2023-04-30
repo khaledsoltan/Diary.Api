@@ -9,6 +9,7 @@ namespace Domain.Responses
     public sealed class OkApiResponse<TResult> : ApiBaseResponse
     {
         public TResult Result { get; set; }
+
         public OkApiResponse(TResult result) : base(true)
         {
             Result = result;

@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.DTOS.Auth
+namespace Domain.Diary.Responses
 {
-    public record TokenDto(string AccessToken, string RefreshToken , bool success = true);
+    public class RequestResponse
+    {
 
+    }
 }

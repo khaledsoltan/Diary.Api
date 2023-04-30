@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Responses
 {
-    public abstract class ApiNotFoundResponse : ApiBaseResponse
+    public  class ApiNotFoundResponse : ApiBaseResponse
     {
         public string Message { get; set; }
         public ApiNotFoundResponse(string message)

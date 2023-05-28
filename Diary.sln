@@ -23,10 +23,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hateoas.Extension", "Presen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Diary", "Api.Diary\Api.Diary.csproj", "{31E6A7E2-D03A-44C8-8FF9-39B289C56801}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Diary.Unit.Tests", "Diary.Unit.Tests\Diary.Unit.Tests.csproj", "{360456FC-0355-44B7-B98C-127AD7D86FCB}"
-EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Client", "Client\Client.esproj", "{AC1666DA-BC43-427E-BDCB-5CEAE9EDB049}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,16 +57,6 @@ Global
 		{31E6A7E2-D03A-44C8-8FF9-39B289C56801}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31E6A7E2-D03A-44C8-8FF9-39B289C56801}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31E6A7E2-D03A-44C8-8FF9-39B289C56801}.Release|Any CPU.Build.0 = Release|Any CPU
-		{360456FC-0355-44B7-B98C-127AD7D86FCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{360456FC-0355-44B7-B98C-127AD7D86FCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{360456FC-0355-44B7-B98C-127AD7D86FCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{360456FC-0355-44B7-B98C-127AD7D86FCB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AC1666DA-BC43-427E-BDCB-5CEAE9EDB049}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC1666DA-BC43-427E-BDCB-5CEAE9EDB049}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC1666DA-BC43-427E-BDCB-5CEAE9EDB049}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{AC1666DA-BC43-427E-BDCB-5CEAE9EDB049}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC1666DA-BC43-427E-BDCB-5CEAE9EDB049}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AC1666DA-BC43-427E-BDCB-5CEAE9EDB049}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
